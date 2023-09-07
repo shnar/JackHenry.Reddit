@@ -1,0 +1,78 @@
+﻿@model HomeViewModel;
+@{
+	ViewData["Title"] = "Home Page";
+}
+
+<h1>Jack Henry Reddit Project</h1>
+
+<p>The following shows the list of the most up-voted posts and most active users for the following subreddit:</p>
+
+<p style="text-align:center; font-weight:bold;">lotr</p>
+
+<div class="container">
+	<div class="row">
+		<div class="col">
+			<div class="card">
+				<div class="card-header">
+					Most Up-Voted Posts
+				</div>
+
+				<div id="MostActivePosts" class="card-body">
+					@Html.Partial("_ViewMostPosts", Model.PostInfos)
+				</div>
+			</div>
+		</div>
+		<div class="col">
+			<div class="card">
+				<div class="card-header">
+					Most Active Users
+				</div>
+
+				<div id="MostActiveUsers" class="card-body">
+					@Html.Partial("_ViewMostUsers", Model.UserInfos)
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+	let timerId;
+
+	// Call fetchAndUpdateData when the page loads
+	window.addEventListener("load", function () {
+		timerId = setInterval(fetchAndUpdatePostData, 2000); // Fetch data every 2 seconds
+		timerId = setInterval(fetchAndUpdateUserData, 2000); // Fetch data every 2 seconds
+	});
+
+	function fetchAndUpdatePostData() {
+		// Replace the URL below with the website you want to fetch data from
+		const url = "/Home/MostPosts";
+
+		fetch(url)
+			.then(response => response.text())
+			.then(data => {
+				const resultDiv = document.getElementById("MostActivePosts");
+				resultDiv.innerHTML = data;
+			})
+			.catch(error => {
+				console.error("Error fetching data:", error);
+			});
+	}
+
+
+	function fetchAndUpdateUserData() {
+		// Replace the URL below with the website you want to fetch data from
+		const url = "/Home/MostUsers";
+
+		fetch(url)
+			.then(response => response.text())
+			.then(data => {
+				const resultDiv = document.getElementById("MostActiveUsers");
+				resultDiv.innerHTML = data;
+			})
+			.catch(error => {
+				console.error("Error fetching data:", error);
+			});
+	}
+</script>

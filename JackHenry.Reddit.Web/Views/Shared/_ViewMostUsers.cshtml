@@ -1,0 +1,15 @@
+﻿@model List<JackHenry.Reddit.Models.UserInfo>;
+
+<table width="100%" class="table table-striped">
+	<tr>
+		<th>User Name</th>
+		<th># of Posts</th>
+	</tr>
+	@foreach (var user in Model)
+	{
+		<tr>
+			<td>@user.UserName</td>
+			<td>@user.NumberOfPosts</td>
+		</tr>
+	}
+</table>

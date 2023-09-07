@@ -1,0 +1,15 @@
+﻿@model List<JackHenry.Reddit.Models.PostInfo>;
+
+<table width="100%" class="table table-striped">
+	<tr>
+		<th>Post Title</th>
+		<th>Up Votes</th>
+	</tr>
+	@foreach (var post in Model)
+	{
+		<tr>
+			<td>@post.Title</td>
+			<td>@post.UpVotes</td>
+		</tr>
+	}
+</table>
